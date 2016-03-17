@@ -40,24 +40,35 @@ class Houseware < Item
   end
 end
 
-bananas = Fruit.new("Bananas",10)
-orange = Fruit.new("Orange",10)
-rice = Item.new("Rice",1)
-vacuum_cleaner = Houseware.new("Vacuum Cleaner",150)
-anchovies = Item.new("Anchovies",2)
+class ShoppingCart
+  def initialize
+    @items=[]
+  end
+  def add_item(item)
+    @items.push(item)
+  end
 
-puts '''
-bananas = Fruit.new("Bananas",10)
-orange = Fruit.new("Orange",10)
-rice = Item.new("Rice",1)
-vacuum_cleaner = Houseware.new("Vacuum Cleaner",150)
-anchovies = Item.new("Anchovies",2)
+  def checkout
+    totalprice = 0
+    @items.each do |item| 
+        totalprice += item.price
+    end
+    puts "Your total today is $#{totalprice}. Have a nice day!"
+  end
+end
 
-'''
-puts bananas.price
-puts orange.price
-puts rice.price
-puts vacuum_cleaner.price
-puts anchovies.price
+joshs_cart = ShoppingCart.new
+banana = Fruit.new("Banana", 10)
+vaccuum = Houseware.new("Vaccuum", 150)
+oj = Item.new("Orange Juice", 10)
+rice = Item.new("Rice", 1)
+anchovies = Item.new("Anchovies", 2)
+
+joshs_cart.add_item(oj)
+joshs_cart.add_item(rice)
+joshs_cart.add_item(vaccuum)
+joshs_cart.checkout
+
+# Your total today is $11. Have a nice day!
 
 binding.pry
