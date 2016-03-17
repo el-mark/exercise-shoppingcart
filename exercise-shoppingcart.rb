@@ -50,23 +50,33 @@ class ShoppingCart
 
   def checkout
     totalprice = 0
+    counter = 0
     @items.each do |item| 
         totalprice += item.price
+        counter = counter +1
     end
+    if counter > 5 
+      totalprice = totalprice * 0.9
+    end
+
     puts "Your total today is $#{totalprice}. Have a nice day!"
   end
 end
 
-joshs_cart = ShoppingCart.new
+joshs_cart = ShoppingCart.new 
 banana = Fruit.new("Banana", 10)
 vaccuum = Houseware.new("Vaccuum", 150)
 oj = Item.new("Orange Juice", 10)
 rice = Item.new("Rice", 1)
 anchovies = Item.new("Anchovies", 2)
+almondsmilk = Item.new("Almond's Milk", 5)
 
 joshs_cart.add_item(oj)
 joshs_cart.add_item(rice)
+joshs_cart.add_item(anchovies)
 joshs_cart.add_item(vaccuum)
+joshs_cart.add_item(banana)
+joshs_cart.add_item(almondsmilk)
 joshs_cart.checkout
 
 # Your total today is $11. Have a nice day!
