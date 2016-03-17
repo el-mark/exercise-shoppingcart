@@ -1,3 +1,5 @@
+require 'pry'
+
 class ShoppingCart
   def initialize
     @items = []
@@ -10,35 +12,31 @@ class Item
       @price = price
   end
 
-  def final_price
-      final_price = @price - fruit.discount #- houseware.discount 
-  end
-end
-
-class Houseware < Item
-  attr_reader :discount
-  def discount
-      discount = 0
-      t = Time.now   #=> 2007-11-20 02:35:35 -0600
-      if t == 6 || t == 7
-      	discount = item.price * 0.1
-      else 
-      	discount = 0
-      end
-      discount
+  def price
+      price = @price
   end
 end
 
 class Fruit < Item
-  attr_reader :discount
-  def discount
-      discount = 0
-      if item.price > 100 
-      	discount = item.price * 0.05
-      else 
-      	discount = 0
+  attr_reader :price
+  def price
+      price = @price
+      t = Time.now   #=> 2007-11-20 02:35:35 -0600
+      if t.wday == 6 || t.wday == 7
+      	price = price * 0.9
       end
-      discount
+      price
+  end
+end
+
+class Houseware < Item
+  attr_reader :price
+  def price
+      price = @price
+      if price > 100 
+      	price = price * 0.95
+      end
+      price
   end
 end
 
@@ -56,9 +54,10 @@ vacuum_cleaner = Houseware.new("Vacuum Cleaner",150)
 anchovies = Item.new("Anchovies",2)
 
 '''
+puts bananas.price
+puts orange.price
+puts rice.price
+puts vacuum_cleaner.price
+puts anchovies.price
 
-puts bananas.final_price
-#puts orange.final_price
-#puts rice.final_price
-#puts vacuum_cleaner.final_price
-#puts anchovies.final_price
+binding.pry
